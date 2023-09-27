@@ -17,7 +17,7 @@ async function UserRegistration(req,res) {
             console.error('Error creating user:', error);
         });
 
-        const accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET,{expiresIn:'15d'})
+        const accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET,{expiresIn:'2m'})
         res.json({accessToken: accessToken,userData: user})
 
     } catch(e){
@@ -31,7 +31,7 @@ async function UserRegistrationGet(req, res) {
 }
 
 async function UserLogin(req, res){
-    const accessToken = jwt.sign({user: req.user}, process.env.ACCESS_TOKEN_SECRET,{expiresIn:'15d'});
+    const accessToken = jwt.sign({user: req.user}, process.env.ACCESS_TOKEN_SECRET,{expiresIn:'2m'});
     const user = req.user;
     res.json({accessToken: accessToken, userData: user})
 }
