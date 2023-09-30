@@ -4,12 +4,14 @@ const {checkSelfId} = require('../utils')
 async function PosTask(req, res) {
     const today = new Date()
     const result = today.toISOString().split('T')[0]
+    const time = today.getHours() + ":" + today.getMinutes() +":" + today.getSeconds()
     const t = req.body;
     const newTask = new Task()
     newTask.name = t.data.headLine;
     newTask.description = t.data.description;
     newTask.user_id = t.userId;
     newTask.date = t.data.estimation || result;
+    newTask.deadLine = t.data.deadLine || time
     newTask.status = 'backlog';
     await newTask.save()
 
@@ -24,6 +26,7 @@ async function UpdateTasks(req, res) {
     task.name = info.headLine
     task.description = info.description
     task.date = info.estimation
+    task.deadLine = info.deadLine
     task.status = info.status
     task.save()
     res.send(task)
@@ -62,6 +65,7 @@ async function GetAllTasks(req, res){
     const token = auth.split(' ')[1]
     checkSelfId(body.user._id, token)
     const tasks = await Task.find({user_id: body.user._id});
+
 
     res.status(200).send({data: tasks,status:'OK'})
 }
