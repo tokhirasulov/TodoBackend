@@ -37,6 +37,7 @@ const login = async (req, res, next) => {
                 return res.status(206).send('Passwords not matched');
             } else {
                 req.user = user;
+                console.log(`User: ${user} \n Password: ${user[i].password}`);
                 next();
             }
             userExists = true;

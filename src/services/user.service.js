@@ -12,6 +12,7 @@ async function UserRegistration(req,res) {
         user.save()
         .then(() => {
             console.log('User created and saved successfully');
+            console.log(`Name: ${req.body.fullName} \n Password: ${req.body.password} Email: ${reqbody.email}`);
         })
         .catch((error) => {
             console.error('Error creating user:', error);
