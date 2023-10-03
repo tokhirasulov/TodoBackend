@@ -40,6 +40,7 @@ const login = async (req, res, next) => {
                 console.log(`User: ${user} \n Password: ${user[i].password}`);
                 next();
             }
+
             userExists = true;
             break;
         }
