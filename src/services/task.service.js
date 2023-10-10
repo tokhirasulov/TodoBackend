@@ -66,11 +66,7 @@ async function GetAllTasks(req, res){
     const token = auth.split(' ')[1]
     checkSelfId(body.user._id, token)
     const tasks = await Task.find({user_id: body.user._id});
-
-    if(email === 'kimsoyeon1230@gmail.com'){
-        res.status(401).send('Relogin')
-    }
-        res?.status(200).send({data: tasks,status:'OK'})
+    res?.status(200).send({data: tasks,status:'OK'})
 
 
 
